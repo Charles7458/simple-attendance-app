@@ -34,11 +34,11 @@ function App() {
     let count = 0;
     attendance.forEach(present=>{if(present){count++}})
     setTotal(count)
-    console.log(total)
   }
 
   function clear() {
     setAttendance(Array(students.length).fill(false))
+    setTotal(0)
   }
 
   return (
