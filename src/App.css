@@ -11,3 +11,13 @@ body {
   text-align: center;
   backdrop-filter: blur(10px);
 }
+
+.clear-btn {
+  height: fit-content;
+  padding: 5px 20px;
+  margin-left: 40px;
+  background-color: gray;
+  border: none;
+  color: white;
+  font-weight: bolder;
+}
