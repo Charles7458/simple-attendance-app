@@ -1,0 +1,13 @@
+body {
+  background-color: rgb(46, 46, 46);
+  color: whitesmoke;
+
+}
+
+.head{
+  font-size: 40px;
+  background-color: rgba(128, 128, 128, 0.303);
+  padding: 40px 0px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
