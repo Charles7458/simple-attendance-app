@@ -160,11 +160,11 @@ function App() {
     <div>
       <h1 className='head'>MCA Attendance</h1>
       <h4 style={{textAlign:'center'}}>Total: {total} students present out of {boys.length+girls.length}</h4>
+      <button onClick={clear} className='clear-btn'>Clear All</button>
       <div className='attendance-grid'>
         <div>
           <div style={{display:"flex", alignItems:'center'}}>
             <p>{boysTotal == boysAttendance.length ? "All" : boysTotal} boys are present today out of {boysAttendance.length}</p>
-            <button onClick={clear} className='clear-btn'>Clear</button>
           </div>
          <span> Boys:{" "}
          {deletingBoys ? <DeleteInput name={deleteName} change={setDeleteName} type='boys' delete={handleDelete} close={()=>setDeletingBoys(false)}/> :
@@ -182,7 +182,6 @@ function App() {
 
           <div style={{display:"flex", alignItems:'center'}}>
             <p>{girlsTotal == girlsAttendance.length ? "All" : girlsTotal} girls are present today out of {girlsAttendance.length}</p>
-            <button onClick={clear} className='clear-btn'>Clear</button>
           </div>
           <span>Girls: {" "}
             { deletingGirls ?  <DeleteInput name={deleteName} change={setDeleteName} type='girls' delete={handleDelete} close={()=>setDeletingGirls(false)}/>:
