@@ -14,11 +14,12 @@ function EditInput(fn:{name:string, change:(name:string)=>void, save:()=>void, c
   )
 }
 
-function DeleteInput(fn:{name:string, change:(name:string)=>void,type:string, delete:(type:string)=>void}){
+function DeleteInput(fn:{name:string, change:(name:string)=>void,type:string, delete:(type:string)=>void, close:()=>void}){
   return(
     <div style={{display:'flex',columnGap:'10px',marginBlock:'10px'}}>
       <input type='text' value={fn.name} onChange={e=>fn.change(e.target.value)}/>
       <button onClick={()=>fn.delete(fn.type)}>delete</button>
+      <button onClick={fn.close}>close</button>
     </div>
   )
 }
@@ -72,6 +73,8 @@ function App() {
   const [girlsTotal, setGirlsTotal] = useState(0);
   const total= boysTotal+ girlsTotal;
   const [editingBoys, setEditingBoys]  = useState(false);
+  const [deletingBoys, setDeletingBoys]  = useState(false);
+  const [deletingGirls, setDeletingGirls]  = useState(false);
   const [editingGirls, setEditingGirls]  = useState(false);
   const [newName,setNewName] = useState("")
   const [deleteName,setDeleteName] = useState("")
@@ -163,8 +166,10 @@ function App() {
             <p>{boysTotal == boysAttendance.length ? "All" : boysTotal} boys are present today out of {boysAttendance.length}</p>
             <button onClick={clear} className='clear-btn'>Clear</button>
           </div>
-         <p> Boys:</p>
-         <DeleteInput name={deleteName} change={setDeleteName} type='boys' delete={handleDelete}/>
+         <span> Boys:{" "}
+         {deletingBoys ? <DeleteInput name={deleteName} change={setDeleteName} type='boys' delete={handleDelete} close={()=>setDeletingBoys(false)}/> :
+         <button style={{marginBottom:'10px'}} onClick={()=>setDeletingBoys(true)}>delete</button>}
+         </span>
           {boys.map((student,i) => <Student name={student} id={i} setAttendance={handleBoysAttendance} attendance={boysAttendance[i]} />)}
           
         {editingBoys ? <EditInput name={newName} change={setNewName} save={handleSave} cancel={()=>setEditingBoys(false)}/> :
@@ -179,8 +184,12 @@ function App() {
             <p>{girlsTotal == girlsAttendance.length ? "All" : girlsTotal} girls are present today out of {girlsAttendance.length}</p>
             <button onClick={clear} className='clear-btn'>Clear</button>
           </div>
-          <p>Girls:</p>
-          <DeleteInput name={deleteName} change={setDeleteName} type='girls' delete={handleDelete}/>
+          <span>Girls: {" "}
+            { deletingGirls ?  <DeleteInput name={deleteName} change={setDeleteName} type='girls' delete={handleDelete} close={()=>setDeletingGirls(false)}/>:
+            <button style={{marginBottom:'10px'}} onClick={()=>setDeletingGirls(true)}>delete</button>
+          }
+          </span>
+          
           {girls.map((student,i) => <Student name={student} id={i} setAttendance={handleGirlsAttendance} attendance={girlsAttendance[i]} />)}
           
           {editingGirls ? <EditInput name={newName} change={setNewName} save={handleSave} cancel={()=>setEditingGirls(false)}/> : 
