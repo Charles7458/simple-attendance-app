@@ -1,0 +1,54 @@
+body {
+  background-color: rgb(46, 46, 46);
+  color: whitesmoke;
+
+}
+
+.head{
+  font-size: 40px;
+  background-color: rgba(128, 128, 128, 0.303);
+  padding: 40px 0px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  word-spacing: 20px;
+}
+
+.attendance-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0px 20px;
+}
+
+.add-btn{
+  display:block;
+  justify-self: start;
+  margin-top: 20px;
+  font-size: larger;
+  padding:5px 10px;
+}
+
+.clear-btn {
+  height: fit-content;
+  padding: 5px 20px;
+  margin-left: 40px;
+  background-color: rgb(201, 48, 48);
+  border: none;
+  color: white;
+  font-weight: bolder;
+}
+
+.edit-btn {
+  height: fit-content;
+  /* padding: 5px 20px; */
+  margin-left: 40px;
+  background-color: gray;
+  border: none;
+  color: white;
+  font-weight: bolder;
+}
+
+@media (max-width:500px){
+  .attendance-grid{
+    grid-template-columns: auto;
+  }
+}
