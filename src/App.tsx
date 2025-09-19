@@ -66,8 +66,25 @@ function App() {
   }
 });
   
-  const [boysAttendance,setBoysAttendance] = useState(Array(boys.length).fill(false));
-  const [girlsAttendance,setGirlsAttendance] = useState(Array(girls.length).fill(false));
+  const [boysAttendance,setBoysAttendance] =     useState<boolean[]>(() => {
+  try {
+    const stored = localStorage.getItem("boysAttendance");
+    return stored ? JSON.parse(stored) : [];
+  } catch {
+    return Array(boys.length).fill(false);
+  }
+});
+
+  const [girlsAttendance,setGirlsAttendance] = 
+  useState<boolean[]>(() => {
+  try {
+    const stored = localStorage.getItem("girlsAttendance");
+    return stored ? JSON.parse(stored) : [];
+  } catch {
+    return Array(girls.length).fill(false);
+  }
+});
+
   // console.log(attendance)
   const [boysTotal,setBoysTotal] = useState(0);
   const [girlsTotal, setGirlsTotal] = useState(0);
@@ -89,6 +106,7 @@ function App() {
       newAttendance[id] = false;
     }
     setBoysAttendance(newAttendance)
+    localStorage.setItem("boysAttendance", JSON.stringify(boysAttendance))
     console.log(boysAttendance)
     let count = 0;
     boysAttendance.forEach(present=>{if(present){count++}})
@@ -105,6 +123,7 @@ function App() {
       newAttendance[id] = false;
     }
     setGirlsAttendance(newAttendance)
+    localStorage.setItem("girlsAttendance", JSON.stringify(girlsAttendance))
     let count = 0;
     girlsAttendance.forEach(present=>{if(present){count++}})
     setGirlsTotal(count)
@@ -147,14 +166,18 @@ function App() {
   }
 
   useEffect(()=>{
+    setBoysAttendance([...boysAttendance,false])
     localStorage.setItem("boys", JSON.stringify(boys))
     console.log("new boys list saved")
   },[boys])
 
+
    useEffect(()=>{
+    setGirlsAttendance([...girlsAttendance,false])
     localStorage.setItem("girls", JSON.stringify(girls))
     console.log("new girls list saved")
   },[girls])
+
 
   return (
     <div>
